@@ -31,5 +31,18 @@ document.addEventListener("submit", function (event) {
     status.remove();
   }
 
-  fetch(form.action);
+  // Envía el formulario completo para incluir _method=PUT y authenticity_token;
+  // si no se guarda, recarga para mostrar el estado real.
+  fetch(form.action, {
+    method: "POST",
+    body: new URLSearchParams(new FormData(form)),
+  })
+    .then(function (response) {
+      if (!response.ok) {
+        throw new Error("No se pudo guardar la tarea");
+      }
+    })
+    .catch(function () {
+      window.location.reload();
+    });
 });

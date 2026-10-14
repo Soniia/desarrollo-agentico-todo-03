@@ -237,3 +237,13 @@ func (as *ActionSuite) Test_TasksUpdate_InvalidID() {
 	res := as.HTML("/tasks/no-es-un-uuid").Put(url.Values{"title": {"Título nuevo"}})
 	as.Equal(404, res.Code)
 }
+
+func (as *ActionSuite) Test_AppJS_TogglePersistsViaFormPost() {
+	res := as.HTML("/assets/app.js").Get()
+	as.Equal(200, res.Code)
+
+	body := res.Body.String()
+	as.Contains(body, `method: "POST"`)
+	as.Contains(body, "new FormData(form)")
+	as.NotContains(body, "fetch(form.action);")
+}
