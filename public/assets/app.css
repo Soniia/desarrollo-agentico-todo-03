@@ -121,7 +121,7 @@ h1 {
 
 .task {
   display: grid;
-  grid-template-columns: 44px minmax(0, 1fr) auto;
+  grid-template-columns: 44px minmax(0, 1fr) auto auto;
   align-items: start;
   column-gap: 0.3rem;
   min-height: 61px;
@@ -181,6 +181,25 @@ h1 {
 
 .task-toggle-button:hover .completion-icon svg {
   opacity: 1;
+}
+
+.task-priority {
+  align-self: center;
+  padding: 0.15rem 0.5rem;
+  font-size: 0.75rem;
+  color: var(--color-muted);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.task-priority-alta {
+  color: var(--color-primary);
+  background: #fff0eb;
+}
+
+.task-priority-baja {
+  background: var(--color-sidebar);
 }
 
 .task-completed .task-title {
@@ -245,7 +264,8 @@ h1 {
   line-height: 1;
 }
 
-input[type="text"] {
+input[type="text"],
+select {
   width: 100%;
   min-width: 0;
   min-height: 44px;
@@ -261,11 +281,21 @@ input[type="text"] {
   flex: 1;
 }
 
+.new-task-row select {
+  flex: 0 0 auto;
+  width: auto;
+}
+
+.edit-task label[for="task-priority"] {
+  margin-top: 1.25rem;
+}
+
 input::placeholder {
   color: var(--color-muted);
 }
 
-input[aria-invalid="true"] {
+input[aria-invalid="true"],
+select[aria-invalid="true"] {
   border-color: var(--color-danger);
   background: #fff9f7;
 }
@@ -307,7 +337,8 @@ input[aria-invalid="true"] {
 
 a:focus-visible,
 button:focus-visible,
-input:focus-visible {
+input:focus-visible,
+select:focus-visible {
   outline: 3px solid var(--color-focus);
   outline-offset: 3px;
 }
@@ -434,7 +465,7 @@ input:focus-visible {
   }
 
   .task {
-    grid-template-columns: 36px minmax(0, 1fr) auto;
+    grid-template-columns: 36px minmax(0, 1fr) auto auto;
   }
 
   .task-toggle-button,
